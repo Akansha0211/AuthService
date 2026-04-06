@@ -2,12 +2,14 @@ package org.example.service;
 
 import org.example.entities.RefreshToken;
 import org.example.entities.UserInfo;
+import org.example.model.UserInfoDto;
 import org.example.repository.RefreshTokenRepository;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -28,7 +30,7 @@ public class RefreshTokenService {
     * This method will be called when Login request is made(which happens when JWT and Refresh Token expires)
     * */
     public RefreshToken createRefreshToken(String username){
-        UserInfo userInfoExtracted = userRepository.findUsername(username);
+        UserInfo userInfoExtracted = userRepository.findByUsername(username);
         RefreshToken refreshToken = RefreshToken.builder()
                 .userInfo(userInfoExtracted)
                 .token(UUID.randomUUID().toString())
@@ -43,5 +45,13 @@ public class RefreshTokenService {
             throw new RuntimeException(token.getToken() + " Refresh toke  is expired, Please make a new login");
         }
         return token;
+    }
+
+    /*
+    * Repository method always considered a best practice when called inside service not dierctly in controller
+    *
+    * */
+    public Optional<RefreshToken> findByToken(String token){
+        return refreshTokenRepository.findByToken(token);
     }
 }

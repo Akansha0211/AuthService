@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -53,7 +54,10 @@ public class JwtService {
         final String username = extractUsername(token); // extrcating user name from token
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
+    public String GenerateToken(String username){
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, username);
+    }
     /*
     * Big picture
     * creating token(THIS METHOD BELOW) --> extracting claims(Creating JWT using parser(i.e builder)

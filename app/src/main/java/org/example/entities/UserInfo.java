@@ -31,4 +31,14 @@ public class UserInfo {
     )
     private Set<UserRole> roles = new HashSet<>(); // one user id --> having multiple role, so multiple roles saved in set
     // users, roles, user_roles --> tables
+
+//    Tables_in_authService |
+//            +-----------------------+
+//            | tokens                |
+//            | user_role             |
+//            | user_role_seq         |
+//            | user_roles            |
+//            | users
+
+
 }

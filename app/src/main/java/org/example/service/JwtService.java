@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.function.Function;
 * stores token, chceking token expied or not
 * jwt token signed with a secret key
 */
+@Service
 public class JwtService {
     public static final String SCRET_KEY = "397b70de93d501d2b6be56fcc8ec1ccac86d770d8fa85ef76cc4c8c0ac44331a";  // 256 bits randomly generated key
     // key to be stored inside key manager or env file

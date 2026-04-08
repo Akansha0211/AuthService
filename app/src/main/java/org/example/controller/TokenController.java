@@ -32,7 +32,7 @@ public class TokenController {
     * */
     @PostMapping("auth/v1/login")
     public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthRequestDto authRequestDto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDto.getPassword(), authRequestDto.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDto.getUsername(), authRequestDto.getPassword()));
         if(authentication.isAuthenticated()){
             RefreshToken refreshToken = refreshTokenService.createRefreshToken(authRequestDto.getUsername());
             return new ResponseEntity<>(JWTResponseDto.builder()
